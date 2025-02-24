@@ -1,5 +1,5 @@
 name: Summarize SVS SBOMs
-description: 👋 Greet someone and record the time
+description: Collects SBOM-files from a list of provided repositories and summarizes and groups them by license returning a json.
 
 inputs:
     filename:
