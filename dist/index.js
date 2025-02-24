@@ -1,4 +1,3 @@
-import { createRequire as __WEBPACK_EXTERNAL_createRequire } from "module";
 /******/ var __webpack_modules__ = ({
 
 /***/ 188:
@@ -87,8 +86,6 @@ __nccwpck_require__.d(__webpack_exports__, {
   e: () => (/* binding */ run)
 });
 
-;// CONCATENATED MODULE: external "fs"
-const external_fs_namespaceObject = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("fs");
 // EXTERNAL MODULE: ../../.nvm/versions/node/v22.14.0/lib/node_modules/@vercel/ncc/dist/ncc/@@notfound.js?@actions/core
 var core = __nccwpck_require__(188);
 // EXTERNAL MODULE: ../../.nvm/versions/node/v22.14.0/lib/node_modules/@vercel/ncc/dist/ncc/@@notfound.js?axios
@@ -286,7 +283,6 @@ class MergedSbom {
 
 
 
-
 const filename = core.getInput("filename") ? core.getInput("filename") : "dependencies.sbom.json";
 const reposString = core.getInput("repos");
 
@@ -300,8 +296,6 @@ const run = async () => {
 
         core.info("=== 2. Generating merged SBOM ===");
         const mergedSbom = new MergedSbom(sboms);
-        (0,external_fs_namespaceObject.writeFileSync)(`svs-sbom.json`, mergedSbom.toString());
-
         core.setOutput("json", mergedSbom.toString());
     } catch (error) {
         const message = "message" in error ? error.nessage : error;

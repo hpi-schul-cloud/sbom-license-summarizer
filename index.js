@@ -1,4 +1,3 @@
-import { writeFileSync } from "fs";
 import core from "@actions/core";
 import loadSboms from "./src/loadSboms.js";
 import MergedSbom from "./src/MergedSbom.js";
@@ -16,8 +15,6 @@ export const run = async () => {
 
         core.info("=== 2. Generating merged SBOM ===");
         const mergedSbom = new MergedSbom(sboms);
-        writeFileSync(`svs-sbom.json`, mergedSbom.toString());
-
         core.setOutput("json", mergedSbom.toString());
     } catch (error) {
         const message = "message" in error ? error.nessage : error;

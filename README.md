@@ -5,11 +5,9 @@ The resulting JSON is provided as an output variable.
 
 ## Usage
 
-Example:
+example:
 
 ```yml
-# action.yml
----
 steps:
     - name: Summarise SVS-SBOMs
       id: summary
@@ -24,12 +22,12 @@ steps:
 
 ## Inputs
 
-| name     | description                                                                                                                                |
-| -------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| filename | name of the json-file containing the SBOM information in SPDX format                                                                       |
-| repos    | list of repositories separated by semicolon - each entry in the format <code>{ project }/{ repos }@{ version \| commit id as SHA } </code> |
+| name     | description                                                                                                                 |
+| -------- | --------------------------------------------------------------------------------------------------------------------------- |
+| filename | name of the json-file containing the SBOM information in SPDX format                                                        |
+| repos    | list of repositories separated by semicolon - each entry in the format `{ project }/{ repo }@{ version };{ project }/s ...` |
 
-Example inputs:
+example:
 
 ```yml
 with:
@@ -43,7 +41,7 @@ with:
 | ---- | ------------------------------------- |
 | json | summarizing json - grouped by license |
 
-Example output:
+example:
 
 ```jsonc
 {
@@ -71,14 +69,13 @@ Example output:
 
 When changing the code in this action, you need to run <code>npm run build</code> afterwards and need to push not only your changes - but also the generated /dist/index.js file.
 
-This is necessary as the action is run directly without installing any dependencies. During the build step the dependencies and the actions sourcecode are bundled into a single javascript file, that is directly executable.
+This is necessary as the action is run directly without installing any dependencies. The build script bundles the action's sourcecode and the dependencies into a single javascript file, that is directly executable.
 
-### Hint
+**_Hint_**
 
 When trying to test the changes from within another github workflow, you need to keep in mind, that you have to adapt the action call by updating/replacing the version with the current commit SHA - in order to ensure that the newest version of the action will be executed.
 
 ```yml
----
 steps:
     - name: Summarise SVS-SBOMs
       id: summary
@@ -88,21 +85,14 @@ steps:
 becomes:
 
 ```yml
----
 steps:
     - name: Summarise SVS-SBOMs
       id: summary
       uses: hpi-schul-cloud/sbom-summarizer@878e288f16f32be59bd19b12dd668a7874df7f06
 ```
 
-After finishing the implementation it makes sense to tag a new version in this repo.
-
-becomes:
+After finishing the implementation it makes sense to tag a new version in this repo so that other workflows can directly address it:
 
 ```yml
----
-steps:
-    - name: Summarise SVS-SBOMs
-      id: summary
-      uses: hpi-schul-cloud/sbom-summarizer@1.0.1
+uses: hpi-schul-cloud/sbom-summarizer@1.0.1
 ```
