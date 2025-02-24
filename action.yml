@@ -1,0 +1,17 @@
+name: SBOM license summarizer
+description: Collects SBOM-files from a list of provided repositories and summarizes and groups them by license returning a json.
+
+inputs:
+    filename:
+        description: "The filename containing the individual sboms of the SVS-repos"
+
+    repos:
+        description: "Semicolon-separated list of repositories and their versions {repo}@{version}"
+
+outputs:
+    json:
+        description: "The summarizing JSON of all dependencies grouped by license."
+
+runs:
+    using: node20
+    main: ./dist/index.js

@@ -1,0 +1,21 @@
+name: Test the action
+
+on:
+    workflow_dispatch:
+        inputs:
+            filename:
+                type: string
+                description: "The filename containing the individual sboms of the SVS-repos"
+                required: true
+            repos:
+                type: string
+                description: "Semicolon-separated list of repositories and their versions {repo}@{version}"
+                required: true
+
+jobs:
+    test-action:
+        name: Test the action now
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - run: node ./dist/index.js
