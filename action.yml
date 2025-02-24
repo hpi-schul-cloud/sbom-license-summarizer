@@ -1,4 +1,4 @@
-name: Summarize SVS SBOMs
+name: SBOM summarizer
 description: Collects SBOM-files from a list of provided repositories and summarizes and groups them by license returning a json.
 
 inputs:
