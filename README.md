@@ -1,6 +1,6 @@
-# SBOM summarizer
+# SBOM license summarizer
 
-SBOM summarizer is a Github-Action that collects SBOM-files from a list of provided repositories and summarizes and groups them by license.
+SBOM license summarizer is a Github-Action that collects SBOM-files from a list of provided repositories and summarizes and groups them by license.
 The resulting JSON is provided as an output variable.
 
 ## Usage
