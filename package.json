@@ -3,12 +3,15 @@
   "module": "index.js",
   "type": "module",
   "scripts": {
-    "build": "npx ncc build index.js -o dist"
+    "build": "ncc build index.js -o dist"
   },
   "dependencies": {
     "@actions/core": "^1.11.1",
     "@actions/github": "^6.0.0",
     "axios": "^1.7.9",
     "spdx-license-list": "^6.9.0"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.38.3"
   }
 }
