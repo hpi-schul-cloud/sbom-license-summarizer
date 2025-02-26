@@ -4,9 +4,11 @@ description: Collects SBOM-files from a list of provided repositories and summar
 inputs:
     filename:
         description: "The filename containing the individual sboms of the SVS-repos"
+        required: true
 
     repos:
         description: "Semicolon-separated list of repositories and their versions {repo}@{version}"
+        required: true
 
 outputs:
     json:
