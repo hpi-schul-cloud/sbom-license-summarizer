@@ -15,10 +15,13 @@ export const run = async () => {
 
         core.info("=== 2. Generating merged SBOM ===");
         const mergedSbom = new MergedSbom(sboms);
+        if (mergedSbom.isEmpty()) {
+            throw new Error("Merged SBOM is empty");
+        }
         core.setOutput("json", mergedSbom.toString());
     } catch (error) {
-        const message = "message" in error ? error.nessage : error;
-        core.error(message);
+        core.error(error);
+        process.exit(1);
     }
 };
 
