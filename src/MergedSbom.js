@@ -40,6 +40,10 @@ export default class MergedSbom {
         return JSON.stringify(licenseList, null, 2);
     }
 
+    isEmpty() {
+        return Object.keys(this.mergedSbom).length === 0;
+    }
+
     getLicenseList() {
         const licenseNames = this.getLicenseNames();
         licenseNames.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
