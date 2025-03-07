@@ -41,7 +41,7 @@ export default class MergedSbom {
     }
 
     isEmpty() {
-        return Object.keys(this.mergedSbom).length === 0;
+        return this.mergedSbom.keys().length === 0;
     }
 
     getLicenseList() {
