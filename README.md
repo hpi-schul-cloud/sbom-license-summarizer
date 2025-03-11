@@ -20,6 +20,54 @@ steps:
       run: echo '${{ toJson(steps.summary.outputs.json) }}'
 ```
 
+## Integration in SVS-deployment workflow
+
+```mermaid
+---
+config:
+  look: handDrawn
+  theme: neutral
+---
+flowchart TB
+    subgraph 1
+        direction LR
+        A["Tag created"]
+        AC@{ shape: braces, label: "in dof_app_deploy" }
+    end
+    
+    subgraph 2
+        direction LR
+        B["GitHub action gets triggered"]
+    end
+
+    subgraph 3
+        C["Fetch SBOMs of repos"]
+        CC@{ shape: braces, label: "from Repos' Release Artifacts (SPDX)" }
+    end
+
+    subgraph sbom-license-summarizer
+        D["Merge SBOMs into combined JSON format "]
+        DC@{ shape: braces, label: "{ 'license': '', 'components': [ ... ] }" }
+    end
+
+    subgraph 5
+        E["Upload JSON to S3"]
+        EC@{ shape: braces, label: "at: svs-public-artifacts /<tag>/<instance>-license-summary.json" }
+    end
+
+    A-- when matching '[0-9]*' -->B;
+    B-->C;
+    C-->D;
+    D-->E;
+    
+style 1 color:#fff,stroke:#fff,padding:0px,margin:0px
+style 2 color:#fff,stroke:#fff,padding:0px,margin:0px
+style 3 color:#fff,stroke:#fff,padding:0px,margin:0px
+style sbom-license-summarizer color: #55f,stroke: #339
+style 5 color:#fff,stroke:#fff,padding:0px,margin:0px
+```
+
+
 ## Inputs
 
 | name     | description                                                                                                                 |
