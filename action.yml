@@ -10,9 +10,13 @@ inputs:
         description: "Semicolon-separated list of repositories and their versions {repo}@{version}"
         required: true
 
+    output-filename:
+        description: "The filename to write summarizing JSON of all dependencies grouped by license to"
+        required: true
+
 outputs:
-    json:
-        description: "The summarizing JSON of all dependencies grouped by license."
+    output-filename:
+        description: "The filename the summarizing JSON of all dependencies grouped by license was written to"
 
 runs:
     using: node20
