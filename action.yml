@@ -12,7 +12,7 @@ inputs:
 
     output-filename:
         description: "The filename to write summarizing JSON of all dependencies grouped by license to"
-        required: true
+        required: false
 
 outputs:
     output-filename:
