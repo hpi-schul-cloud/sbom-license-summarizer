@@ -5,9 +5,7 @@ import fs from "fs";
 
 const filename = core.getInput("filename") ? core.getInput("filename") : "dependencies.sbom.json";
 const outputFilename = core.getInput("filename") ? core.getInput("output-filename") : "summarized-licenses.json";
-// const reposString = core.getInput("repos");
-const reposString =
-    "hpi-schul-cloud/schulcloud-server:33.3.0;hpi-schul-cloud/schulcloud-client:33.3.0;hpi-schul-cloud/nuxt-client:33.3.0;hpi-schul-cloud/superhero-dashboard:33.3.0;hpi-schul-cloud/schulcloud-calendar:33.3.0;hpi-schul-cloud/antivirus_check_service:33.3.0;hpi-schul-cloud/version-aggregator:33.3.0;hpi-schul-cloud/h5p-staticfiles-server:33.3.0;hpi-schul-cloud/tldraw-client:33.3.0;hpi-schul-cloud/tldraw-server:33.3.0";
+const reposString = core.getInput("repos");
 
 export const run = async () => {
     try {
