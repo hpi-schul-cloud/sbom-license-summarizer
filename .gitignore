@@ -100,3 +100,5 @@ version
 
 # secrets
 travis_rsa
+
+summarized-licenses.json

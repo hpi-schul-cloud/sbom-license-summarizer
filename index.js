@@ -1,8 +1,10 @@
 import core from "@actions/core";
 import loadSboms from "./src/loadSboms.js";
 import MergedSbom from "./src/MergedSbom.js";
+import fs from "fs";
 
 const filename = core.getInput("filename") ? core.getInput("filename") : "dependencies.sbom.json";
+const outputFilename = core.getInput("filename") ? core.getInput("output-filename") : "summarized-licenses.json";
 const reposString = core.getInput("repos");
 
 export const run = async () => {
@@ -18,7 +20,12 @@ export const run = async () => {
         if (mergedSbom.isEmpty()) {
             throw new Error("Merged SBOM is empty");
         }
-        core.setOutput("json", mergedSbom.toString());
+
+        core.info("Writing merged SBOM to file: " + outputFilename);
+        fs.writeFileSync(outputFilename, mergedSbom.toString());
+        core.setOutput("output-filename", outputFilename);
+
+        core.info("=== 3. Done ===");
     } catch (error) {
         core.error(error);
         process.exit(1);
