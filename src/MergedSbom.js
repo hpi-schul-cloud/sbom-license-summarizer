@@ -90,14 +90,12 @@ export default class MergedSbom {
     addPackageToLicense(licenseKey, name, version) {
         const license = spdxLicenseList[licenseKey];
         if (license === undefined) {
-            core.warning(`License not found: '${licenseKey}' for ${name}@${version}`);
+            core.warning(`Licensetext not found for: '${licenseKey}' for ${name}@${version}`);
             return;
         }
-        const content = this.mergedSbom.get(license.name) ?? {
-            licenseName: license.name,
-            licenseText: license.licenseText,
-            packages: new Set(),
-        };
+        const licenseName = license?.name ?? licenseKey;
+        const licenseText = license?.licenseText;
+        const content = this.mergedSbom.get(license.name) ?? { licenseName, licenseText, packages: new Set() };
         content.packages.add(`${name}@${version}`);
         this.mergedSbom.set(license.name, content);
     }
