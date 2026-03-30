@@ -1,33 +1,33 @@
-import core from "@actions/core";
+import { getInput, info, setOutput } from "@actions/core";
+import fs from "fs";
 import loadSboms from "./src/loadSboms.js";
 import MergedSbom from "./src/MergedSbom.js";
-import fs from "fs";
 
-const filename = core.getInput("filename") ? core.getInput("filename") : "dependencies.sbom.json";
-const outputFilename = core.getInput("filename") ? core.getInput("output-filename") : "summarized-licenses.json";
-const reposString = core.getInput("repos");
+const filename = getInput("filename") || "dependencies.sbom.json";
+const outputFilename = getInput("output-filename") || "summarized-licenses.json";
+const reposString = getInput("repos");
 
 export const run = async () => {
     try {
-        core.info("=== 1. Loading SBOMs ===");
-        core.info("filename: " + filename);
-        core.info("repoString: " + reposString);
+        info("=== 1. Loading SBOMs ===");
+        info("filename: " + filename);
+        info("repoString: " + reposString);
         const repos = reposString !== "" ? reposString.split(";") : ["hpi-schul-cloud/tldraw-server:999.6.6"];
         const sboms = await loadSboms(filename, repos);
 
-        core.info("=== 2. Generating merged SBOM ===");
+        info("=== 2. Generating merged SBOM ===");
         const mergedSbom = new MergedSbom(sboms);
         if (mergedSbom.isEmpty()) {
             throw new Error("Merged SBOM is empty");
         }
 
-        core.info("Writing merged SBOM to file: " + outputFilename);
+        info("Writing merged SBOM to file: " + outputFilename);
         fs.writeFileSync(outputFilename, mergedSbom.toString());
-        core.setOutput("output-filename", outputFilename);
+        setOutput("output-filename", outputFilename);
 
-        core.info("=== 3. Done ===");
+        info("=== 3. Done ===");
     } catch (error) {
-        core.error(error);
+        error(error);
         process.exit(1);
     }
 };

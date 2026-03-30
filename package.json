@@ -6,8 +6,8 @@
     "build": "ncc build index.js -o dist"
   },
   "dependencies": {
-    "@actions/core": "^1.11.1",
-    "@actions/github": "^6.0.0",
+    "@actions/core": "^3.0.0",
+    "@actions/github": "^9.0.0",
     "axios": "^1.12.0",
     "spdx-license-list": "^6.9.0"
   },

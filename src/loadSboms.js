@@ -1,5 +1,5 @@
+import { error, info, warning } from "@actions/core";
 import axios from "axios";
-import core from "@actions/core";
 
 const axiosInstance = axios.create();
 axiosInstance.defaults.maxRedirects = 0; // Set to 0 to prevent automatic redirects
@@ -35,7 +35,7 @@ async function loadSbom(repository, repositoryVersion, filename) {
     const sbomUrl = `https://github.com/${repository}/releases/download/${repositoryVersion}/${filename}`;
     const response = await axiosInstance.get(sbomUrl);
     if (response.status !== 200) {
-        core.error(`Failed to load SBOM for "${repository}@${repositoryVersion}" (status: ${response.status})`);
+        error(`Failed to load SBOM for "${repository}@${repositoryVersion}" (status: ${response.status})`);
         return;
     }
     const sbom = {
@@ -44,7 +44,7 @@ async function loadSbom(repository, repositoryVersion, filename) {
         ...response.data.sbom,
     };
     if (sbom) {
-        core.info(
+        info(
             `Loaded SBOM for ${repository}@${repositoryVersion} (containing ${
                 sbom?.packages?.length ?? "---"
             } packages))`
@@ -57,7 +57,7 @@ function processResults(results) {
     const sboms = [];
     for (const result of results) {
         if (result.status === "rejected") {
-            core.warning(result.reason);
+            warning(result.reason);
         } else {
             if (result.value !== undefined) {
                 sboms.push(result.value);
