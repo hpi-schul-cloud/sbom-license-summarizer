@@ -3,8 +3,8 @@ import fs from "fs";
 import loadSboms from "./src/loadSboms.js";
 import MergedSbom from "./src/MergedSbom.js";
 
-const filename = getInput("filename") ? getInput("filename") : "dependencies.sbom.json";
-const outputFilename = getInput("output-filename") ? getInput("output-filename") : "summarized-licenses.json";
+const filename = getInput("filename") || "dependencies.sbom.json";
+const outputFilename = getInput("output-filename") || "summarized-licenses.json";
 const reposString = getInput("repos");
 
 export const run = async () => {

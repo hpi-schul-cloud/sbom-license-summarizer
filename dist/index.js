@@ -40499,8 +40499,8 @@ class MergedSbom {
 
 
 
-const filename = getInput("filename") ? getInput("filename") : "dependencies.sbom.json";
-const outputFilename = getInput("output-filename") ? getInput("output-filename") : "summarized-licenses.json";
+const filename = getInput("filename") || "dependencies.sbom.json";
+const outputFilename = getInput("output-filename") || "summarized-licenses.json";
 const reposString = getInput("repos");
 
 const run = async () => {
